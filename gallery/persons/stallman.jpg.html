@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>stallman</title>
+<meta charset="utf-8">
+
+
+<link rel="preload" as="image" href="../../gallery/persons/smart.jpg">
+
+
+
+
+
+<link rel="preload" as="image" href="../../gallery/persons/torvalds.jpg">
+
+
+<style>
+* {
+  margin-top: 0;
+}
+p {
+  margin: 0;
+}
+
+#container {
+  height: 100vh;
+}
+#container-img {
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#container-text {
+  font-size: 2em;
+}
+
+.arrow-left2 {
+  font-size: 30px;
+  line-height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+}
+.arrow-right2 {
+  font-size: 30px;
+  line-height: 30px;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+}
+.cross {
+  font-size: 30px;
+  line-height: 30px;
+  position: absolute;
+  margin-top: 15px;
+  right: 15px;
+}
+.link a {
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<span class="link cross"><a href="../../gallery" id="baseurl">❌</a></span>
+
+<span class="link arrow-left2"><a href="../../gallery/persons/smart.jpg.html" id="prevpage">◀</a></span>
+
+
+<span class="link arrow-right2"><a href="../../gallery/persons/torvalds.jpg.html" id="nextpage">▶</a></span>
+
+<div id="container">
+
+<img id="container-img" src="../../gallery/persons/stallman.jpg">
+
+<div id="container-text">
+<p>Richard Stallman</p>
+</div>
+</div>
+HERE GOES COMMENT</br>
+SYSTEM
+</body>
+<script type="text/javascript">
+function resizeImage() {
+  var containerHeight = document.getElementById('container').clientHeight;
+  var textHeight = document.getElementById('container-text').clientHeight;
+  var imageHeight = containerHeight - textHeight;
+  var image = document.getElementById('container-img');
+  image.style.height = imageHeight + "px";
+}
+resizeImage();
+window.addEventListener("resize", resizeImage, false);
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+
+  switch (event.key) {
+
+    case "Left": // IE/Edge specific value
+    case "ArrowLeft":
+    case "a":
+window.location = document.getElementById('prevpage').href;
+      break;
+
+
+    case "Right": // IE/Edge specific value
+    case "ArrowRight":
+    case "d":
+window.location = document.getElementById('nextpage').href;
+      break;
+
+    case "Esc": // IE/Edge specific value
+    case "Escape":
+window.location = document.getElementById('baseurl').href;
+      break;
+    default:
+      return; // Quit when this doesn't handle the key event.
+  }
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
+}, true);
+</script>
