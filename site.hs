@@ -7,7 +7,7 @@ import Algorithms.NaturalSort
 import System.FilePath
 import Control.Applicative
 import Data.List
-import Hakyll.Images (loadImage, scaleImageCompiler)
+import Hakyll.Images (loadImage, ensureFitCompiler)
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -78,7 +78,7 @@ main = hakyll $ do
     match galleryImages $ version "thumbnail" $ do
       route . customRoute $ (\x -> replaceExtension x (".thumb" ++ takeExtension x)) . toFilePath
       compile $ loadImage
-        >>= scaleImageCompiler 128 128
+        >>= ensureFitCompiler 200 72
     -- photo descriptions
     match (fromGlob $ folder ++ "/*/*.md") $ do
         route . customRoute $ (<.> "html") . toFilePath
@@ -218,7 +218,7 @@ galleryField = functionField "gallery" $ \[args] _ ->
   return $ unlines [
     "$for(" ++ args ++ ")$",
     "$if(video)$",
-    "<a href=\"$page$\"><video height=\"128\" width=\"128\" preload=\"metadata\"><source src=\"$url$#t=1\"></video></a>",
+    "<a href=\"$page$\"><video width=\"128\" height=\"72\" preload=\"metadata\"><source src=\"$url$#t=1\"></video></a>",
     "$else$",
     "<a href=\"$page$\"><img src=\"$thumbnail$\"/></a>",
     "<link rel=\"prefetch\" href=\"$url$\">",
